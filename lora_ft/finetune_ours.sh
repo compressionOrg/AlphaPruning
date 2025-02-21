@@ -1,6 +1,6 @@
 python finetune_lm.py \
     --model_name_or_path [Path to Sparse model weights] \
-    --config_name "pinkmanlove/llama-7b-hf" \
+    --config_name "Enoch/llama-7b-hf" \
     --dataset_name c4 \
     --num_train_epochs 1 \
     --block_size 2048 \

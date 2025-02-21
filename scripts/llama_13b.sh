@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Set common variables
-model="pinkmanlove/llama-13b-hf"
+model="Enoch/llama-13b-hf"
 sparsity_ratio=0.7
-cuda_device=0
+cuda_device=1,3
 
 # Set CUDA device visibility
 export CUDA_VISIBLE_DEVICES=$cuda_device
@@ -18,7 +18,8 @@ run_python_command () {
     --save $3 \
     --ww_metric alpha_peak \
     --ww_metric_cache ./data/llama-13b-hf/ \
-    --epsilon $2
+    --epsilon $2 \
+    --eval_zero_shot > logs/llama_13b_${1}_epsilon_${2}.log
 }
 
 

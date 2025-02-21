@@ -94,27 +94,29 @@ def eval_zero_shot(model_name, model, tokenizer, task_list=["boolq","rte","hella
                 task_names.add(matching)
         return list(task_names)
     task_names = pattern_match(task_list, tasks.ALL_TASKS)
-    model_args = f"pretrained={model_name},cache_dir=./llm_weights"
+    model_args = f"pretrained={model_name}"
     limit = None 
     if "70b" in model_name or "65b" in model_name:
         limit = 2000
     if use_accelerate:
-        model_args = f"pretrained={model_name},cache_dir=./llm_weights,use_accelerate=True"
+        model_args = f"pretrained={model_name},use_accelerate=True,device_map_option=\"auto\""
     results = evaluator.simple_evaluate(
         model="hf-causal-experimental",
         model_args=model_args,
         tasks=task_names,
         num_fewshot=num_fewshot,
         batch_size=None,
+        max_batch_size=None,
         device=None,
         no_cache=True,
-        limit=limit,
+        # limit=limit,
         description_dict={},
         decontamination_ngrams_path=None,
         check_integrity=False,
-        pretrained_model=model,
-        tokenizer=tokenizer, 
-        add_special_tokens=add_special_tokens
+        write_out=False,
+        output_base_path=None
     )
-
+    print("********************************")
+    print("zero_shot evaluation results")
+    print(evaluator.make_table(results))
     return results 

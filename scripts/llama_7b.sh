@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set common variables
-model="pinkmanlove/llama-7b-hf"
+model="Enoch/llama-7b-hf"
 sparsity_ratio=0.7
 cuda_device=0
 
@@ -18,7 +18,8 @@ run_python_command () {
     --save $3 \
     --ww_metric alpha_peak \
     --ww_metric_cache ./data/llama-7b-hf/ \
-    --epsilon $2
+    --epsilon $2 \
+    --eval_zero_shot > logs/llama_7b_${1}_epsilon_${2}.log
 }
 
 

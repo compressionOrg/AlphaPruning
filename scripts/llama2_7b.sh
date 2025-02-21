@@ -18,7 +18,8 @@ run_python_command () {
     --save $3 \
     --ww_metric alpha_peak \
     --ww_metric_cache ./data/llama2-7b-hf/ \
-    --epsilon $2
+    --epsilon $2 \
+    --eval_zero_shot > logs/llama2_7b_${1}_epsilon_${2}.log
 }
 
 
